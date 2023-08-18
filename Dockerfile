@@ -15,7 +15,6 @@ WORKDIR /app
 
 COPY .mvn/ .mvn
 COPY mvnw pom.xml ./
-RUN ./mvn dependency:resolve
 
 COPY src ./src
 
