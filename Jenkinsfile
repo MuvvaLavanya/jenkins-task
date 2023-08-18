@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+            SONAR_TOKEN = credentials('GYM_SONAR_TOKEN')
+            }
 
     stages {
         stage('Build, Test, and Generate Coverage') {
