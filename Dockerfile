@@ -6,7 +6,7 @@
 # Use the OpenJDK 11 image as the base image
 FROM openjdk:17
 EXPOSE 7000
-MKDIR /app
+RUN MKDIR /app
 COPY target/assesment-project.jar /app
 ADD target/assesment-project.jar assesment-project.jar
 ENTRYPOINT ["java","-jar","/assesment-project.war"]
