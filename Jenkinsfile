@@ -24,6 +24,15 @@ pipeline {
                         bat "docker build -t assesment/project ."
                     }
                 }
+        stage('Push to Docker Hub') {
+                    steps {
+                        // Log in to Docker Hub and push the image
+                        withCredentials([usernamePassword(credentialsId: 'dockerhub-credentials', usernameVariable: 'lavanyamuvva1', passwordVariable: 'admin1234')]) {
+                            bat "docker login -u $lavanyamuvva1 -p $admin1234"
+                            bat "docker push lavanyamuvva1/assesment/project"
+                        }
+                    }
+                }
 
         }
 
