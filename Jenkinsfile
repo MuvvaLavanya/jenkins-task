@@ -21,7 +21,7 @@ pipeline {
         stage('Build Docker Image') {
                     steps {
                         // Build the Docker image using the Dockerfile
-                        sh 'docker build -t lavanyamuvva1/assesment-project:${BUILD_NUMBER} .'
+                        sh 'docker build -t assesment-project .'
                     }
                 }
 
