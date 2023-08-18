@@ -14,7 +14,7 @@ FROM openjdk:17
 WORKDIR /app
 
 COPY .mvn/ .mvn
-COPY mvnw pom.xml ./
+COPY mvn pom.xml ./
 
 COPY src ./src
 
