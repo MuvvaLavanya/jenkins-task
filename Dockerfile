@@ -8,6 +8,7 @@ FROM openjdk:17
 EXPOSE 7000
 ADD target/assesment-project.jar assesment-project.jar
 ENTRYPOINT ["java","-jar","/assesment-project.war"]
+CMD java -jar assesment-project.jar
 ## Create a new app directory for my application files
 #RUN mkdir /app
 #
