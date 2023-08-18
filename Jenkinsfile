@@ -1,12 +1,6 @@
 pipeline {
     agent any
 
-    environment {
-        SONAR_TOKEN = credentials('SONAR_TOKEN')
-         TOMCAT_CREDENTIALS = credentials('TOMCAT_CREDENTIALS') // Use the ID of the Jenkins credential containing Tomcat credentials
-
-    }
-
     stages {
         stage('Build, Test, and Generate Coverage') {
             steps {
@@ -14,23 +8,21 @@ pipeline {
                 bat "mvn jacoco:prepare-agent"
             }
         }
-        stage('SonarQube Analysis') {
+    stage('SonarQube Analysis') {
             steps {
                 bat "mvn sonar:sonar -Dsonar.projectKey=jenkins-task -Dsonar.projectName='jenkins-task' -Dsonar.host.url=http://localhost:9000 -Dsonar.login=%SONAR_TOKEN% -Dsonar.java.coveragePlugin=jacoco"
             }
-            post{
-            success{
-            archiveArtifacts artifacts:'**/target/*.war'
+
             }
-            }
+
+        stage('Build Docker Image') {
+                    steps {
+                        // Build the Docker image using the Dockerfile
+                        sh 'docker build -t lavanyamuvva1/assesment-project:${BUILD_NUMBER} .'
+                    }
+                }
 
         }
 
-                 stage('Deploy to Tomcat') {
-                             steps {
-                                 // Deploy the war file to Tomcat
-                                deploy adapters: [tomcat9(credentialsId: 'TOMCAT_CREDENTIALS', path: '', url: 'http://localhost:9005')], contextPath: 'assessment-jenkins-task', war: '**/*.war'
-                             }
-                         }
+
     }
-}
