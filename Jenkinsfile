@@ -21,7 +21,7 @@ pipeline {
         stage('Build Docker Image') {
                     steps {
                         // Build the Docker image using the Dockerfile
-                        sh 'docker build -t assesment-project .'
+                        sh 'docker build -t assesment/project .'
                     }
                 }
 
