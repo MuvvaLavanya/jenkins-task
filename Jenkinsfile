@@ -21,7 +21,7 @@ pipeline {
         stage('Build Docker Image') {
                     steps {
                         // Build the Docker image using the Dockerfile
-                        bat "docker build -t assesment/project ."
+                        bat "docker build -t assesment/project2 ."
                     }
                 }
         stage('Push to Docker Hub') {

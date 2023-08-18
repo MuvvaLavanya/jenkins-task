@@ -4,10 +4,22 @@
 #ENTRYPOINT ["java","-jar","/assesment-project.jar"]
 
 # Use the OpenJDK 11 image as the base image
+#FROM openjdk:17
+#EXPOSE 7000
+#ADD target/assesment-project.jar assesment-project.jar
+#ENTRYPOINT ["java","-jar","/assesment-project.jar"]
+
 FROM openjdk:17
-EXPOSE 7000
-ADD target/assesment-project.jar assesment-project.jar
-ENTRYPOINT ["java","-jar","/assesment-project.jar"]
+
+WORKDIR /app
+
+COPY .mvn/ .mvn
+COPY mvnw pom.xml ./
+RUN ./mvnw dependency:resolve
+
+COPY src ./src
+
+CMD ["./mvnw", "spring-boot:run"]
 ## Create a new app directory for my application files
 #RUN mkdir /app
 #
